@@ -123,10 +123,3 @@ Total de 20 variáveis.
 Minimizar o custo total das formulações, garantindo que cada suplemento atenda aos requisitos nutricionais.
 
 ---
-
-## 🚀 Como Resolver
-
-Instale os pacotes necessários:
-
-```bash
-pip install scipy numpy
