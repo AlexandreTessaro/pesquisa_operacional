@@ -1,6 +1,7 @@
 # 📊 Programação Linear com Simplex — Desafios no Contexto Farmacêutico
 
-Este repositório reúne três problemas de **Programação Linear** aplicados à área farmacêutica, modelados para serem resolvidos com o método **Simplex** usando Python (`scipy.optimize.linprog`). As questões possuem níveis de dificuldade crescente e foco em **produção**, **logística** e **formulação de produtos**.
+Este repositório reúne três problemas de Programação Linear aplicados à área farmacêutica, modelados para serem resolvidos com o método Simplex usando Python (`scipy.optimize.linprog`).  
+As questões possuem níveis de dificuldade crescente e foco em produção, logística e formulação de produtos.
 
 ---
 
@@ -10,7 +11,7 @@ Praticar modelagem matemática e resolução de problemas reais da indústria fa
 
 - Alocação ótima de recursos
 - Logística de distribuição
-- Otimização de fórmulas nutricionais
+- Otimização de produção e maximização de lucro
 
 ---
 
@@ -24,35 +25,36 @@ Uma farmacêutica produz três medicamentos:
 - **Ibuprofeno (M2)**
 - **Dipirona (M3)**
 
-Eles podem ser produzidos em **duas fábricas (F1 e F2)**, e o Ibuprofeno também pode ser terceirizado (**F3**). Cada combinação de medicamento e fábrica consome diferentes quantidades dos compostos A, B e C, e gera um lucro unitário diferente:
+Eles podem ser produzidos em duas fábricas (**F1** e **F2**), e o **Ibuprofeno** também pode ser terceirizado (**F3**).  
+Cada combinação de medicamento e fábrica consome diferentes quantidades dos compostos A, B e C, e gera um lucro unitário diferente:
 
-| Med. | Fábrica | Comp. A (g) | Comp. B (g) | Comp. C (g) | Lucro (R$) |
-|------|---------|-------------|-------------|-------------|------------|
-| M1   | F1      | 2           | 3           | 1           | 1.50       |
-| M1   | F2      | 1           | 4           | 2           | 1.30       |
-| M2   | F1      | 3           | 2           | 1           | 1.80       |
-| M2   | F2      | 2           | 3           | 2           | 1.60       |
-| M2   | F3      | 1           | 1           | 1           | 1.10       |
-| M3   | F1      | 2           | 1           | 3           | 1.40       |
-| M3   | F2      | 1           | 0           | 4           | 1.20       |
+| Medicamento | Fábrica | Comp. A (g) | Comp. B (g) | Comp. C (g) | Lucro (R$) |
+|:-----------:|:-------:|:-----------:|:-----------:|:-----------:|:----------:|
+| M1          | F1      | 2           | 3           | 1           | 1.50       |
+| M1          | F2      | 1           | 4           | 2           | 1.30       |
+| M2          | F1      | 3           | 2           | 1           | 1.80       |
+| M2          | F2      | 2           | 3           | 2           | 1.60       |
+| M2          | F3      | 1           | 1           | 1           | 1.10       |
+| M3          | F1      | 2           | 1           | 3           | 1.40       |
+| M3          | F2      | 1           | 0           | 4           | 1.20       |
 
 **Recursos disponíveis:**
 
-- Composto A: 2500g  
-- Composto B: 3000g  
-- Composto C: 2000g  
+- Composto A: 2500g
+- Composto B: 3000g
+- Composto C: 2000g
 
 **Variáveis de decisão:**
 
-- \( x_1 \): M1 produzido na F1  
-- \( x_2 \): M1 produzido na F2  
-- \( x_3 \): M2 produzido na F1  
-- \( x_4 \): M2 produzido na F2  
-- \( x_5 \): M2 produzido na F3  
-- \( x_6 \): M3 produzido na F1  
-- \( x_7 \): M3 produzido na F2  
+- `x1`: M1 produzido na F1
+- `x2`: M1 produzido na F2
+- `x3`: M2 produzido na F1
+- `x4`: M2 produzido na F2
+- `x5`: M2 produzido na F3
+- `x6`: M3 produzido na F1
+- `x7`: M3 produzido na F2
 
-**Objetivo:**
+**Objetivo:**  
 Maximizar o lucro total respeitando as restrições de recursos.
 
 ---
@@ -61,65 +63,127 @@ Maximizar o lucro total respeitando as restrições de recursos.
 
 ### Enunciado
 
-Uma farmacêutica precisa distribuir **três tipos de vacinas (V1, V2, V3)** para **três regiões (R1, R2, R3)**. Cada combinação vacina-região tem um custo logístico por dose. As vacinas têm estoques limitados, e as regiões têm demandas mínimas.
+Uma farmacêutica precisa distribuir três tipos de vacinas (**V1**, **V2**, **V3**) para três regiões (**R1**, **R2**, **R3**).  
+Cada combinação vacina-região tem um custo logístico por dose.  
+As vacinas têm estoques limitados, e as regiões têm demandas mínimas.
 
 | Vacina | R1 (R$) | R2 (R$) | R3 (R$) | Estoque |
-|--------|---------|---------|---------|---------|
+|:------:|:-------:|:-------:|:-------:|:-------:|
 | V1     | 1.20    | 1.40    | 1.60    | 2500    |
 | V2     | 1.00    | 1.30    | 1.50    | 3000    |
 | V3     | 1.10    | 1.20    | 1.70    | 2000    |
 
 **Demandas mínimas por região:**
 
-- R1: 2000 doses  
-- R2: 2500 doses  
-- R3: 2200 doses  
+- R1: 2000 doses
+- R2: 2500 doses
+- R3: 2200 doses
 
 **Variáveis de decisão:**
 
-- \( x_{11} \): doses de V1 para R1  
-- \( x_{12} \): doses de V1 para R2  
-- \( x_{13} \): doses de V1 para R3  
-- \( x_{21} \): doses de V2 para R1  
-- \( x_{22} \): doses de V2 para R2  
-- \( x_{23} \): doses de V2 para R3  
-- \( x_{31} \): doses de V3 para R1  
-- \( x_{32} \): doses de V3 para R2  
-- \( x_{33} \): doses de V3 para R3  
+- `x11`: doses de V1 para R1
+- `x12`: doses de V1 para R2
+- `x13`: doses de V1 para R3
+- `x21`: doses de V2 para R1
+- `x22`: doses de V2 para R2
+- `x23`: doses de V2 para R3
+- `x31`: doses de V3 para R1
+- `x32`: doses de V3 para R2
+- `x33`: doses de V3 para R3
 
-**Objetivo:**
+**Objetivo:**  
 Minimizar o custo total de envio, respeitando estoques e demandas.
 
 ---
 
-## 🧪 Questão Difícil – Formulação de Suplementos (20 variáveis)
+## 🧪 Questão Difícil – Otimização de Produção e Lucro em Suplementos Nutricionais (10 variáveis)
 
 ### Enunciado
 
-Uma farmácia de manipulação quer desenvolver **4 suplementos personalizados (S1 a S4)**, com diferentes combinações de **5 ingredientes (A a E)**. Cada ingrediente fornece nutrientes diferentes e tem um custo por grama. O objetivo é atender aos requisitos nutricionais com o menor custo.
+Uma farmácia de manipulação está planejando a produção de 10 suplementos nutricionais personalizados (**S1** a **S10**), cada um com uma fórmula fixa composta por 8 ingredientes:
 
-| Ingrediente | Ferro | Vitamina C | Cálcio | Zinco | Custo (R$/g) |
-|-------------|-------|------------|--------|-------|--------------|
-| A           | 4     | 1          | 2      | 1     | 0.40         |
-| B           | 3     | 4          | 1      | 0     | 0.35         |
-| C           | 2     | 2          | 5      | 1     | 0.50         |
-| D           | 1     | 3          | 2      | 4     | 0.45         |
-| E           | 5     | 0          | 3      | 2     | 0.30         |
+- Ferro
+- Vitamina C
+- Cálcio
+- Zinco
+- Cafeína
+- Magnésio
+- Ômega 3
+- Proteína Isolada
 
-**Requisitos mínimos por suplemento:**
+Cada ingrediente possui um custo por grama e uma quantidade máxima disponível em estoque.  
+Cada suplemento possui um preço de venda fixo.
 
-- Ferro ≥ 40mg  
-- Vitamina C ≥ 30mg  
-- Cálcio ≥ 35mg  
-- Zinco ≥ 20mg  
+**Ingredientes e Estoques Máximos:**
+
+| Ingrediente     | Estoque (g) |
+|:----------------:|:-----------:|
+| Ferro             | 200         |
+| Vitamina C        | 200         |
+| Cálcio            | 200         |
+| Zinco             | 150         |
+| Cafeína           | 100         |
+| Magnésio          | 150         |
+| Ômega 3           | 120         |
+| Proteína Isolada  | 200         |
+
+**Preço de Venda dos Suplementos:**
+
+| Suplemento | Preço de Venda (R$) |
+|:----------:|:------------------:|
+| S1         | 120                |
+| S2         | 140                |
+| S3         | 110                |
+| S4         | 130                |
+| S5         | 135                |
+| S6         | 125                |
+| S7         | 115                |
+| S8         | 120                |
+| S9         | 130                |
+| S10        | 140                |
+
+**Fórmula de Composição dos Suplementos (g por unidade):**
+
+| Ingrediente        | S1 | S2 | S3 | S4 | S5 | S6 | S7 | S8 | S9 | S10 |
+|:------------------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
+| Ferro              | 8  | 10 | 5  | 12 | 6  | 8  | 4  | 10 | 7  | 9   |
+| Vitamina C         | 6  | 8  | 4  | 5  | 7  | 9  | 6  | 7  | 8  | 5   |
+| Cálcio             | 12 | 10 | 15 | 10 | 5  | 7  | 10 | 6  | 8  | 9   |
+| Zinco              | 5  | 4  | 3  | 5  | 7  | 6  | 2  | 4  | 3  | 5   |
+| Cafeína            | 4  | 6  | 3  | 2  | 5  | 6  | 3  | 2  | 4  | 3   |
+| Magnésio           | 8  | 6  | 7  | 5  | 6  | 5  | 7  | 6  | 5  | 6   |
+| Ômega 3            | 6  | 5  | 4  | 3  | 5  | 6  | 4  | 5  | 4  | 5   |
+| Proteína Isolada   | 10 | 12 | 8  | 9  | 7  | 8  | 9  | 7  | 8  | 9   |
+
+**Custo por Grama dos Ingredientes:**
+
+| Ingrediente        | Custo (R$/g) |
+|:------------------:|:-----------:|
+| Ferro              | 0.40        |
+| Vitamina C         | 0.35        |
+| Cálcio             | 0.50        |
+| Zinco              | 0.45        |
+| Cafeína            | 0.30        |
+| Magnésio           | 0.25        |
+| Ômega 3            | 0.60        |
+| Proteína Isolada   | 0.55        |
 
 **Variáveis de decisão:**
 
-- \( x_{ij} \): quantidade (g) do ingrediente \( i \in \{A, B, C, D, E\} \) no suplemento \( j \in \{S1, S2, S3, S4\} \)
+- `x1`: unidades a produzir de S1
+- `x2`: unidades a produzir de S2
+- `x3`: unidades a produzir de S3
+- `x4`: unidades a produzir de S4
+- `x5`: unidades a produzir de S5
+- `x6`: unidades a produzir de S6
+- `x7`: unidades a produzir de S7
+- `x8`: unidades a produzir de S8
+- `x9`: unidades a produzir de S9
+- `x10`: unidades a produzir de S10
 
-Total de 20 variáveis.
-
-**Objetivo:**
-Minimizar o custo total das formulações, garantindo que cada suplemento atenda aos requisitos nutricionais.
+**Objetivo:**  
+Maximizar o lucro total, respeitando os limites de estoque de cada ingrediente.
 
 ---
+
+
