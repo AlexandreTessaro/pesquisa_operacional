@@ -19,14 +19,28 @@ Praticar modelagem matemática e resolução de problemas reais da indústria fa
 
 ### Enunciado
 
-Uma farmacêutica produz três medicamentos:
+Uma indústria farmacêutica está planejando sua produção para o próximo mês e precisa decidir quantas unidades de cada medicamento serão fabricadas para maximizar o lucro, respeitando as limitações de matérias-primas disponíveis.
 
-- **Paracetamol (M1)**
-- **Ibuprofeno (M2)**
-- **Dipirona (M3)**
+A empresa fabrica três tipos de medicamentos:
 
-Eles podem ser produzidos em duas fábricas (**F1** e **F2**), e o **Ibuprofeno** também pode ser terceirizado (**F3**).  
-Cada combinação de medicamento e fábrica consome diferentes quantidades dos compostos A, B e C, e gera um lucro unitário diferente:
+- M1: Paracetamol
+- M2: Ibuprofeno
+- M3: Dipirona
+
+Esses medicamentos podem ser produzidos em duas fábricas próprias (F1 e F2) e, no caso do Ibuprofeno (M2), também pode ser terceirizado em uma fábrica externa (F3).
+
+Cada medicamento, em cada fábrica, consome quantidades específicas de três compostos químicos:
+
+- Composto A
+- Composto B
+- Composto C
+
+Além disso, cada combinação medicamento-fábrica gera um lucro unitário diferente.
+O objetivo é encontrar a melhor estratégia de produção, respeitando os limites de uso dos compostos:
+
+- Composto A: 2500 g
+- Composto B: 3000 g
+- Composto C: 2000 g
 
 | Medicamento | Fábrica | Comp. A (g) | Comp. B (g) | Comp. C (g) | Lucro (R$) |
 |:-----------:|:-------:|:-----------:|:-----------:|:-----------:|:----------:|
@@ -46,18 +60,33 @@ Cada combinação de medicamento e fábrica consome diferentes quantidades dos c
 
 **Variáveis de decisão:**
 
-- `x1`: M1 produzido na F1
-- `x2`: M1 produzido na F2
-- `x3`: M2 produzido na F1
-- `x4`: M2 produzido na F2
-- `x5`: M2 produzido na F3
-- `x6`: M3 produzido na F1
-- `x7`: M3 produzido na F2
+- x1 = unidades de M1 produzidas em F1
+- x2 = unidades de M1 produzidas em F2
+- x3 = unidades de M2 produzidas em F1
+- x4 = unidades de M2 produzidas em F2
+- x5 = unidades de M2 produzidas em F3 (terceirizada)
+- x6 = unidades de M3 produzidas em F1
+- x7 = unidades de M3 produzidas em F2
 
 **Objetivo:**  
 Maximizar o lucro total respeitando as restrições de recursos.
 
----
+**Max Z=1,5x1​+1,3x2​+1,8x3​+1,6x4​+1,1x5​+1,4x6​+1,2x7​**
+
+**Restrições de Recursos**
+
+**Composto A:**
+2x1 ​+ 1x2 ​+ 3x3 ​+ 2x4​ + 1x5​ + 2x6​ + 1x7​ ≤ 2500
+
+**Composto B:** 
+3x1​ + 4x2​ + 2x3​ + 3x4 ​+ 1x5 ​+ 1x6 ​+ 0x7 ​≤3000
+
+**Composto C:** 
+1x1 ​+ 2x2 ​+ 1x3 ​+ 2x4 ​+ 1x5 ​+ 3x6 ​+ 4x7 ​≤ 2000
+
+**Restrição de não negatividade:**
+
+x1​,x2​,x3​,x4​,x5​,x6​,x7 ​≥ 0
 
 ## 🚚 Questão Média – Distribuição de Vacinas (9 variáveis)
 
