@@ -68,7 +68,8 @@ O objetivo é encontrar a melhor estratégia de produção, respeitando os limit
 - x6 = unidades de M3 produzidas em F1
 - x7 = unidades de M3 produzidas em F2
 
-**Objetivo:**  
+**Função Objetivo:**  
+
 Maximizar o lucro total respeitando as restrições de recursos.
 
 **Max Z=1,5x1​+1,3x2​+1,8x3​+1,6x4​+1,1x5​+1,4x6​+1,2x7​**
@@ -76,12 +77,15 @@ Maximizar o lucro total respeitando as restrições de recursos.
 **Restrições de Recursos**
 
 **Composto A:**
+
 2x1 ​+ 1x2 ​+ 3x3 ​+ 2x4​ + 1x5​ + 2x6​ + 1x7​ ≤ 2500
 
 **Composto B:** 
+
 3x1​ + 4x2​ + 2x3​ + 3x4 ​+ 1x5 ​+ 1x6 ​+ 0x7 ​≤3000
 
 **Composto C:** 
+
 1x1 ​+ 2x2 ​+ 1x3 ​+ 2x4 ​+ 1x5 ​+ 3x6 ​+ 4x7 ​≤ 2000
 
 **Restrição de não negatividade:**
